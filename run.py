@@ -1,6 +1,4 @@
-text = "Wello world"
-var1 = 35
-var2 = 3
-result = var1 * var2
+from app.routes import app
 
-print("\n" + text + "\n" + str(result) + "\n")
+if __name__ == '__main__':
+    app.run(debug=True)
