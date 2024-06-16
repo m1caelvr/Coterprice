@@ -6,15 +6,17 @@
     <title>Coterprice - Comparador de Preços</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <!-- Adicione o script JavaScript do Google Custom Search -->
-    <script async src="https://cse.google.com/cse.js?cx=674e03429c1244056">
-    </script>
+    <script async src="https://cse.google.com/cse.js?cx=f3109a572bc7e498d"></script>
 </head>
 <body>
     <div class="container">
         <h1>&copy; Coterprice</h1>
         <form id="searchForm" action="javascript:;">
-            <input type="text" id="query" name="query" placeholder="Digite sua busca...">
-            <button type="submit" onclick="search()">Buscar</button>
+            <div>
+                <input type="text" id="query" name="query" placeholder="Digite sua busca...">
+                <button type="submit" onclick="search()">Buscar</button>
+            </div>
+            <div class="gcse-search"></div>
         </form>
         <div class="gcse-search" data-resultsUrl="/search"></div>
         <div id="results">

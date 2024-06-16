@@ -1,12 +1,9 @@
-console.log(1);
-
 document.addEventListener('DOMContentLoaded', function() {
     const searchForm = document.getElementById('searchForm');
     const resultsContainer = document.getElementById('results');
-
+    
     searchForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        
         const query = document.getElementById('query').value;
 
         fetch('/api/data', {
@@ -18,10 +15,11 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
+            console.log('Dados recebidos:', data);
             displayResults(data);
         })
         .catch(error => {
-            console.error('Error:', error);
+            console.error('Erro:', error);
             resultsContainer.innerHTML = '<p>Erro ao buscar os dados. Por favor, tente novamente mais tarde.</p>';
         });
     });
@@ -29,18 +27,18 @@ document.addEventListener('DOMContentLoaded', function() {
     function displayResults(data) {
         resultsContainer.innerHTML = ''; // Limpar resultados anteriores
         
-        if (data.items.length === 0) {
+        if (!data || data.length === 0) {
             resultsContainer.innerHTML = '<p>Nenhum resultado encontrado para esta busca.</p>';
             return;
         }
 
         const itemList = document.createElement('ul');
 
-        data.items.forEach(item => {
+        data.forEach(item => {
             const listItem = document.createElement('li');
             const itemLink = document.createElement('a');
-            itemLink.href = item.link;
-            itemLink.textContent = `${item.title} - Preço: ${item.price}`;
+            itemLink.href = item.link || '#'; // Verifica se há um link; caso contrário, usa '#'
+            itemLink.textContent = `${item.title} - Preço: ${item.price || 'Preço não disponível'}`; // Verifica se há um preço; caso contrário, mostra 'Preço não disponível'
             listItem.appendChild(itemLink);
             itemList.appendChild(listItem);
         });
